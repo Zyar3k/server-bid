@@ -4,7 +4,7 @@ require("express-async-errors");
 const express = require("express");
 const app = express();
 const connectDB = require("./db/connect");
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8888;
 const mongoUri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.6tpkm.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
 const authRouter = require("./routes/auth");
 const booksRouter = require("./routes/books");
