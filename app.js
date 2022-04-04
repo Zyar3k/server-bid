@@ -3,15 +3,15 @@ require("express-async-errors");
 
 const express = require("express");
 const app = express();
+const connectDB = require("./db/connect");
 const PORT = process.env.PORT || 5000;
-
+const mongoUri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.6tpkm.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
 const authRouter = require("./routes/auth");
 const booksRouter = require("./routes/books");
 
 // error handling middleware
 const notFoundMiddleware = require("./middleware/not-found");
 const errorHandlerMiddleware = require("./middleware/error-handler");
-const res = require("express/lib/response");
 
 app.use(express.json());
 
@@ -26,6 +26,7 @@ app.use(errorHandlerMiddleware);
 
 const start = async () => {
   try {
+    await connectDB(mongoUri);
     app.listen(PORT, () =>
       console.log(`Server started on port http://localhost:${PORT}`)
     );
