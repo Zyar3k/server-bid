@@ -1,3 +1,6 @@
+const Book = require("../models/Book");
+const { StatusCodes } = require("http-status-codes");
+
 const getAllBooks = async (req, res) => {
   res.send("get all Books");
 };
@@ -7,7 +10,11 @@ const getBook = async (req, res) => {
 };
 
 const createBook = async (req, res) => {
-  res.send(req.user);
+  req.body.createdBy = req.user.userId;
+  console.log(req.body.createdBy);
+  const book = await Book.create(req.body);
+  console.log(book);
+  res.status(StatusCodes.CREATED).json({ book });
 };
 
 const updateBook = async (req, res) => {
