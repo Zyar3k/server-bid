@@ -17,7 +17,7 @@ const errorHandlerMiddleware = require("./middleware/error-handler");
 app.use(express.json());
 
 app.use("/admin/auth", authRouter);
-app.use("/admin/books", authenticateUser, booksRouter);
+app.use("/admin/books", booksRouter);
 
 // checkout
 app.use("/", booksRouter);
