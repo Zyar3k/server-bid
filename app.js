@@ -8,6 +8,7 @@ const PORT = process.env.PORT || 8888;
 const mongoUri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.6tpkm.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
 const authRouter = require("./routes/auth");
 const booksRouter = require("./routes/books");
+const authenticateUser = require("./middleware/authentication");
 
 // error handling middleware
 const notFoundMiddleware = require("./middleware/not-found");
@@ -16,7 +17,7 @@ const errorHandlerMiddleware = require("./middleware/error-handler");
 app.use(express.json());
 
 app.use("/admin/auth", authRouter);
-app.use("/admin/books", booksRouter);
+app.use("/admin/books", authenticateUser, booksRouter);
 
 // checkout
 app.use("/", booksRouter);
