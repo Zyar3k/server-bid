@@ -5,12 +5,11 @@ const BookSchema = new mongoose.Schema(
     title: {
       type: String,
       required: [true, "Please enter a title"],
-      maxlength: 50,
+      maxlength: 100,
     },
     author: {
       name: {
         type: String,
-        required: [true, "Please enter name of author"],
         maxlength: 20,
       },
       lastName: {
@@ -40,10 +39,19 @@ const BookSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    desc: {
+      type: String,
+    },
     createdBy: {
       type: mongoose.Types.ObjectId,
       ref: "User",
       required: [true, "Please provide user"],
+    },
+    adminRating: {
+      type: Number,
+    },
+    rating: {
+      type: Number,
     },
   },
   { timestamps: true }
