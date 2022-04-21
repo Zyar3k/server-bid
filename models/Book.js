@@ -5,12 +5,12 @@ const BookSchema = new mongoose.Schema(
     title: {
       type: String,
       required: [true, "Please enter a title"],
-      maxlength: 100,
+      maxlength: 150,
     },
     author: {
       name: {
         type: String,
-        maxlength: 20,
+        maxlength: 30,
       },
       lastName: {
         type: String,
@@ -49,9 +49,11 @@ const BookSchema = new mongoose.Schema(
     },
     adminRating: {
       type: Number,
+      default: 0,
     },
     rating: {
       type: Number,
+      default: 0,
     },
   },
   { timestamps: true }

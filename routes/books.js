@@ -10,7 +10,8 @@ const {
   updateBook,
 } = require("../controllers/books");
 
-router.route("/").get(getAllBooks).post(authenticateUser, createBook);
+router.route("/").get(getAllBooks);
+router.route("/create").post(authenticateUser, createBook);
 router
   .route("/:id")
   .get(getBook)

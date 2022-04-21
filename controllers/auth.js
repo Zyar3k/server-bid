@@ -5,11 +5,13 @@ const { BadRequestError, UnauthenticatedError } = require("../errors");
 const register = async (req, res) => {
   const newUser = await User.create({ ...req.body });
   const token = newUser.createJWT();
-  res.status(StatusCodes.CREATED).json({ user: { name: newUser.name }, token });
+  res
+    .status(StatusCodes.CREATED)
+    .json({ user: { name: newUser.name, id: newUser._id }, token });
 };
 
 const login = async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, id } = req.body;
 
   if (!email || !password) {
     throw new BadRequestError("Email and password are required");
@@ -25,7 +27,9 @@ const login = async (req, res) => {
   }
 
   const token = user.createJWT();
-  res.status(StatusCodes.OK).json({ user: { name: user.name }, token });
+  res
+    .status(StatusCodes.OK)
+    .json({ user: { name: user.name, id: user._id }, token });
 };
 
 module.exports = {

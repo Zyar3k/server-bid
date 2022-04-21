@@ -4,7 +4,7 @@ const { NotFoundError, BadRequestError } = require("../errors");
 
 const getAllBooks = async (req, res) => {
   const books = await Book.find().sort("createdAt");
-  res.status(StatusCodes.OK).json({ count: books.length, books });
+  res.status(StatusCodes.OK).json(books);
 };
 
 const getBook = async (req, res) => {
@@ -28,7 +28,18 @@ const createBook = async (req, res) => {
 
 const updateBook = async (req, res) => {
   const {
-    body: { title, author, page, link, list, readed, available },
+    body: {
+      title,
+      author,
+      page,
+      link,
+      list,
+      readed,
+      available,
+      desc,
+      adminRating,
+      rating,
+    },
     params: { id: bookId },
   } = req;
 
@@ -46,6 +57,9 @@ const updateBook = async (req, res) => {
       list,
       readed,
       available,
+      desc,
+      adminRating,
+      rating,
     },
     { new: true }
   );
